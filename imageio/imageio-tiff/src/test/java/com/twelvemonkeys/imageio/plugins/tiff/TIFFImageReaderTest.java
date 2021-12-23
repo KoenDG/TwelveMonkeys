@@ -77,6 +77,8 @@ public class TIFFImageReaderTest extends ImageReaderAbstractTest<TIFFImageReader
     @Override
     protected List<TestData> getTestData() {
         return Arrays.asList(
+                new TestData(getClassLoaderResource("/new/27d40bc5f25d8382b890766accb28cf7.tif"), new Dimension(1110, 1110)), // Fails with "ImageTypeSpecifier from getRawImageType should be in the iterator from getImageTypes"
+
                 new TestData(getClassLoaderResource("/tiff/balloons.tif"), new Dimension(640, 480)), // RGB, uncompressed
                 new TestData(getClassLoaderResource("/tiff/sm_colors_pb.tif"), new Dimension(64, 64)), // RGB, PackBits compressed
                 new TestData(getClassLoaderResource("/tiff/sm_colors_tile.tif"), new Dimension(64, 64)), // RGB, uncompressed, tiled
@@ -737,7 +739,7 @@ public class TIFFImageReaderTest extends ImageReaderAbstractTest<TIFFImageReader
             assertEquals(0xf5,  alphaRaster.getPixel(50, 50, alpha)[0]);
         }
     }
-	
+
     @Test
     public void testMinIsWhiteWithProfile() throws IOException {
         ImageReader reader = createReader();
